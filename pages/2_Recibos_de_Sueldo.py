@@ -16,13 +16,13 @@ def extraer_nombre(texto):
     # Busca el nombre en el campo "Trabajador :"
     match = re.search(r"Trabajador\s*:\s*([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s]+?)(?=\s*(?:Fecha|Régimen|Código|\n\n))", texto)
     if match:
-        nombre = match.group(1).strip()
+        nombre = " ".join(match.group(1).split())
         if len(nombre) > 3:
             return nombre
     # Fallback: secuencia larga de palabras en mayúsculas
     match = re.search(r"([A-ZÁÉÍÓÚÑ]+(?:\s+[A-ZÁÉÍÓÚÑ]+){2,9})", texto)
     if match:
-        return match.group(0)
+        return " ".join(match.group(0).split())
     return None
 
 if uploaded_files:
